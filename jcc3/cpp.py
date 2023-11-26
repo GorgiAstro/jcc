@@ -102,7 +102,7 @@ def sortSignatures(signatures, groupByName=False):
 
             # give up, other must be larger ;-)
             return False
-            
+
         def getRank(self):
             rank = 0
             for item in self.types:
@@ -617,7 +617,7 @@ def jcc(args):
         if moduleName is None:
             raise ValueError('module name not specified (use --python)')
         else:
-            compile(env, os.path.dirname(args[0]), output, moduleName,
+            return compile(env, os.path.dirname(args[0]), output, moduleName,
                     install, dist, debug, jars, version,
                     prefix, root, install_dir, home_dir, use_distutils,
                     shared, compiler, modules, wheel, wininst, find_jvm_dll,
@@ -773,7 +773,7 @@ def jcc(args):
                    shared, generics, use_full_names)
             out.close()
             if build or install or dist or egg_info:
-                compile(env, os.path.dirname(args[0]), output, moduleName,
+                return compile(env, os.path.dirname(args[0]), output, moduleName,
                         install, dist, debug, jars, version,
                         prefix, root, install_dir, home_dir, use_distutils,
                         shared, compiler, modules, wheel, wininst, find_jvm_dll,
