@@ -11,6 +11,7 @@
 #   limitations under the License.
 
 import os, sys, platform, subprocess
+from jdk4py import JAVA, JAVA_HOME
 
 jcc_ver = '3.13'
 machine = platform.machine()
@@ -71,7 +72,7 @@ else:
 JDK = {
     'darwin': JAVAHOME or JAVAFRAMEWORKS,
     'ipod': '/usr/include/gcc',
-    'linux': '/home/yzokras/.jdk/jdk-8',
+    'linux': '/usr/lib/jvm/temurin-17-jdk-amd64',
     'sunos5': '/usr/jdk/instances/jdk1.6.0',
     'win32': JAVAHOME,
     'mingw32': JAVAHOME,
@@ -80,6 +81,8 @@ JDK = {
 if 'JCC_JDK' in os.environ:
     JDK[platform] = os.environ['JCC_JDK']
 
+if JAVA_HOME is not None:
+    JDK[platform] = str(JAVA_HOME)
 
 if not JDK[platform]:
     raise RuntimeError('''

@@ -1,0 +1,15 @@
+# pyproject.toml
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+    "jdk4py==17.0.7.0",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jcc"
+version = "3.13"
+dependencies = [
+    "jdk4py==17.0.7.0",
+]
