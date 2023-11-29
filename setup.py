@@ -238,7 +238,7 @@ try:
         raise ImportError
     from setuptools import setup, Extension
     from pkg_resources import require
-    with_setuptools = require('setuptools')[0].parsed_version
+    with_setuptools = require('setuptools', 'jdk4py==17.0.7.0')[0].parsed_version
 
     try:
         from pkg_resources import SetuptoolsVersion
