@@ -1945,7 +1945,7 @@ def compile(env, jccPath, output, moduleName, install, dist, debug, jars,
     print("setup args = %s" % args)
 
     if 'sdist' in extra_setup_args:
-        #createSetupScript(args)
+        createSetupScript(args)
         return args
     else:
         setup(**args)
