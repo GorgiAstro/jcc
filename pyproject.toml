@@ -3,7 +3,8 @@
 requires = [
     "setuptools",
     "wheel",
-    "jdk4py==17.0.7.0",
+    "jdk4py @ git+https://github.com/GorgiAstro/jdk4py/@test-pack-java-runtime",
+    "jcchelpers @ git+https://github.com/GorgiAstro/jcchelpers"
 ]
 build-backend = "setuptools.build_meta"
 
@@ -30,7 +31,7 @@ classifiers = [
 ]
 version = "3.13"
 dependencies = [
-    "jdk4py==17.0.7.0",
+    "jdk4py @ git+https://github.com/GorgiAstro/jdk4py/@test-pack-java-runtime",
 ]
 
 [tool.setuptools]
@@ -46,8 +47,6 @@ jcc3 = ["*.h"]
 _jcc2 = ["*.h"]
 _jcc3 = ["*.h"]
 java = ["*.java"]
-helpers2 = ["*.py"]
-helpers3 = ["*.py"]
 "jcc2.patches" = ["patch.*"]
 "jcc3.patches" = ["patch.*"]
 

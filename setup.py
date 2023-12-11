@@ -239,7 +239,7 @@ try:
         raise ImportError
     from setuptools import setup, Extension
     from pkg_resources import require
-    with_setuptools = require('setuptools', 'jdk4py@git+https://github.com/GorgiAstro/jdk4py@test-pack-java-runtime')[0].parsed_version
+    with_setuptools = require('setuptools')[0].parsed_version
 
     try:
         from pkg_resources import SetuptoolsVersion
@@ -453,8 +453,7 @@ def main(debug):
         'package_dir': {'jcc': 'jcc%s' %(py_version_suffix)},
         'package_data': {'jcc': package_data},
         'ext_modules': extensions,
-        "cmdclass": {"build_py": jcc_build_py},
-        "install_requires": ["setuptools", "jdk4py@git+https://github.com/GorgiAstro/jdk4py@test-pack-java-runtime"]
+        "cmdclass": {"build_py": jcc_build_py}
     }
     if with_setuptools:
         args['zip_safe'] = False
