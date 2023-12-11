@@ -1,2 +1,0 @@
-setuptools>=61.0
-jdk4py @ git+https://github.com/GorgiAstro/jdk4py@test-pack-java-runtime
