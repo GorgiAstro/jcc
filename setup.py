@@ -11,7 +11,6 @@
 #   limitations under the License.
 
 import os, sys, platform, subprocess
-from jdk4py import JAVA, JAVA_HOME
 
 jcc_ver = '3.13'
 machine = platform.machine()
@@ -69,6 +68,11 @@ else:
     JAVAHOME = None
     JAVAFRAMEWORKS = None
 
+try:
+    from jdk4py import JAVA_HOME as JDK4PY_HOME
+except ModuleNotFoundError:
+    JDK4PY_HOME = None
+
 JDK = {
     'darwin': JAVAHOME or JAVAFRAMEWORKS,
     'ipod': '/usr/include/gcc',
@@ -81,8 +85,8 @@ JDK = {
 if 'JCC_JDK' in os.environ:
     JDK[platform] = os.environ['JCC_JDK']
 
-if JAVA_HOME is not None:
-    JDK[platform] = str(JAVA_HOME)
+if JDK4PY_HOME is not None:
+    JDK[platform] = str(JDK4PY_HOME)
 
 if not JDK[platform]:
     raise RuntimeError('''
@@ -238,7 +242,7 @@ try:
         raise ImportError
     from setuptools import setup, Extension
     from pkg_resources import require
-    with_setuptools = require('setuptools', 'jdk4py>=11')[0].parsed_version
+    with_setuptools = require('setuptools', 'jdk4py@git+https://github.com/GorgiAstro/jdk4py@test-pack-java-runtime')[0].parsed_version
 
     try:
         from pkg_resources import SetuptoolsVersion
