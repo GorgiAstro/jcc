@@ -68,10 +68,7 @@ else:
     JAVAHOME = None
     JAVAFRAMEWORKS = None
 
-try:
-    from jdk4py import JAVA_HOME as JDK4PY_HOME
-except ModuleNotFoundError:
-    JDK4PY_HOME = None
+from jdk4py import JAVA_HOME as JDK4PY_HOME
 
 JDK = {
     'darwin': JAVAHOME or JAVAFRAMEWORKS,
@@ -476,6 +473,7 @@ def main(debug):
         'package_data': {'jcc': package_data},
         'ext_modules': extensions,
         "cmdclass": {"build_py": jcc_build_py},
+        "install_requires": ["setuptools", "jdk4py@git+https://github.com/GorgiAstro/jdk4py@test-pack-java-runtime"]
     }
     if with_setuptools:
         args['zip_safe'] = False
