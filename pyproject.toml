@@ -32,25 +32,3 @@ classifiers = [
 version = "3.13"
 dependencies = [
 ]
-
-[tool.setuptools]
-# ...
-# By default, include-package-data is true in pyproject.toml, so you do
-# NOT have to specify this line.
-include-package-data = true
-
-[tool.setuptools.package-data]
-"*" = ["CHANGES", "DESCRIPTION", "INSTALL", "LICENSE", "NOTICE"]
-jcc2 = ["*.h"]
-"jcc2.sources" = ["*.h"]
-jcc3 = ["*.h"]
-"jcc3.sources" = ["*.h"]
-_jcc2 = ["*.h"]
-_jcc3 = ["*.h"]
-java = ["*.java"]
-"jcc2.patches" = ["patch.*"]
-"jcc3.patches" = ["patch.*"]
-
-[tool.setuptools.exclude-package-data]
-jcc2 = ["config.py"]
-jcc3 = ["config.py"]
