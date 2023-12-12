@@ -3,7 +3,6 @@
 requires = [
     "setuptools",
     "wheel",
-    "jdk4py @ git+https://github.com/GorgiAstro/jdk4py/@test-pack-java-runtime",
     "jcchelpers @ git+https://github.com/GorgiAstro/jcchelpers"
 ]
 build-backend = "setuptools.build_meta"
