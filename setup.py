@@ -11,6 +11,7 @@
 #   limitations under the License.
 
 import os, sys, platform, subprocess
+import jdk
 
 jcc_ver = '3.13'
 machine = platform.machine()
@@ -68,8 +69,6 @@ else:
     JAVAHOME = None
     JAVAFRAMEWORKS = None
 
-from jdk4py import JAVA_HOME as JDK4PY_HOME
-
 JDK = {
     'darwin': JAVAHOME or JAVAFRAMEWORKS,
     'ipod': '/usr/include/gcc',
@@ -82,8 +81,19 @@ JDK = {
 if 'JCC_JDK' in os.environ:
     JDK[platform] = os.environ['JCC_JDK']
 
+JDK_VER = '8'
+JDK4PY_HOME = None
+try:
+    JDK4PY_HOME = jdk.install(JDK_VER)
+except jdk.JdkError:
+    home_folder = os.path.expanduser('~')
+    jdk_root_folder = os.path.join(home_folder, ".jdk")
+    for file in os.listdir(jdk_root_folder):
+        if os.path.isdir(os.path.join(jdk_root_folder, file)) and file.startswith(f"jdk{JDK_VER}"):
+            JDK4PY_HOME = os.path.join(jdk_root_folder, file)
+            break
 if JDK4PY_HOME is not None:
-    JDK[platform] = str(JDK4PY_HOME)
+    JDK[platform] = JDK4PY_HOME
 
 if not JDK[platform]:
     raise RuntimeError('''
