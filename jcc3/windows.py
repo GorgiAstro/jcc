@@ -74,8 +74,11 @@ def get_jvm_dll_directory_from_registry(client_or_server):
 
 
 def get_jvm_dll_directory_from_env(client_or_server):
-
-    path = os.getenv('JCC_JDK') or os.getenv('JAVA_HOME')
+    try:
+        from jcc.config import JCC_JDK
+        path = JCC_JDK
+    except:
+        path = os.getenv('JCC_JDK') or os.getenv('JAVA_HOME')
     if path:
         # Traverse the found path to identify if there is a jvm.dll somewhere
         for location in (('bin', client_or_server),
