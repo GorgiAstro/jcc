@@ -75,8 +75,8 @@ def get_jvm_dll_directory_from_registry(client_or_server):
 
 def get_jvm_dll_directory_from_env(client_or_server):
     try:
-        from jcc.config import JCC_JDK
-        path = JCC_JDK
+        from helpers3.config import JDK_HOME as JCC_HELPERS_JDK
+        path = JCC_HELPERS_JDK
     except:
         path = os.getenv('JCC_JDK') or os.getenv('JAVA_HOME')
     if path:

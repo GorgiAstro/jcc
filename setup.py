@@ -11,7 +11,6 @@
 #   limitations under the License.
 
 import os, sys, platform, subprocess
-import jdk
 
 jcc_ver = '3.13'
 machine = platform.machine()
@@ -81,23 +80,11 @@ JDK = {
 if 'JCC_JDK' in os.environ:
     JDK[platform] = os.environ['JCC_JDK']
 
-JDK_VER = '11' # Don't use JDK8, it has a different directory structure......
-JDK4PY_HOME = None
 try:
-    JDK4PY_HOME = jdk.install(JDK_VER)
-except jdk.JdkError:
-    home_folder = os.path.expanduser('~')
-    jdk_root_folder = os.path.join(home_folder, ".jdk")
-    for file in os.listdir(jdk_root_folder):
-        if os.path.isdir(os.path.join(jdk_root_folder, file)) and file.startswith("jdk"):
-            file_stripped = file.strip("jdk")
-            if file_stripped.startswith("-"):
-                file_stripped = file_stripped.strip("-")
-            if file_stripped.startswith(JDK_VER):
-                JDK4PY_HOME = os.path.join(jdk_root_folder, file)
-                break
-if JDK4PY_HOME is not None:
-    JDK[platform] = JDK4PY_HOME
+    from helpers3.config import JDK_HOME as JCC_HELPERS_JDK
+    JDK[platform] = JCC_HELPERS_JDK
+except:
+    pass
 
 if not JDK[platform]:
     raise RuntimeError('''
@@ -365,7 +352,6 @@ def main(debug):
                    'IMPLIB_LFLAGS=%s' %(_implib_lflags),
                    'SHARED=%s' %(enable_shared),
                    'VERSION="%s"' %(jcc_ver),
-                   'JCC_JDK="%s"' %(JDK[platform]),
                    ''])
 
     extensions = []
