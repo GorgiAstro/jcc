@@ -31,4 +31,5 @@ classifiers = [
 ]
 version = "3.13"
 dependencies = [
+    "jcchelpers @ git+https://github.com/GorgiAstro/jcchelpers"
 ]
