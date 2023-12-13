@@ -84,6 +84,8 @@ def get_jvm_dll_directory_from_env(client_or_server):
         for location in (('bin', client_or_server),
                          ('jre', 'bin', client_or_server)):
             jvm_path = os.path.abspath(os.path.join(path, *location))
+            print(jvm_path)
+            print(os.path.join(jvm_path, "jvm.dll"))
             if os.path.exists(os.path.join(jvm_path, "jvm.dll")):
                 return jvm_path
 
