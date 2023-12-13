@@ -365,6 +365,7 @@ def main(debug):
                    'IMPLIB_LFLAGS=%s' %(_implib_lflags),
                    'SHARED=%s' %(enable_shared),
                    'VERSION="%s"' %(jcc_ver),
+                   'JCC_JDK="%s"' %(JDK[platform]),
                    ''])
 
     extensions = []
