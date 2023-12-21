@@ -80,8 +80,10 @@ JDK = {
 if 'JCC_JDK' in os.environ:
     JDK[platform] = os.environ['JCC_JDK']
 
+JCC_HELPERS_JDK = None
 try:
-    from helpers3.config import JDK_HOME as JCC_HELPERS_JDK
+    from helpers3.config import JDK_HOME
+    JCC_HELPERS_JDK = JDK_HOME
     JDK[platform] = JCC_HELPERS_JDK
 except:
     pass
@@ -201,7 +203,11 @@ if platform == 'linux':
     else:
         LFLAGS['linux'] = LFLAGS['linux/%s' %(machine)]
 elif platform == 'darwin':
-    if JAVAHOME is not None:
+    if JCC_HELPERS_JDK is not None:
+        # Using JDK installed by install-jdk, which is AdoptOpenJDK by default
+        INCLUDES['darwin'] = INCLUDES['darwin/adoptopenjdk']
+        LFLAGS['darwin'] = LFLAGS['darwin/adoptopenjdk']
+    elif JAVAHOME is not None:
         if 'temurin' in JAVAHOME:
             INCLUDES['darwin'] = INCLUDES['darwin/temurin']
             LFLAGS['darwin'] = LFLAGS['darwin/temurin']
