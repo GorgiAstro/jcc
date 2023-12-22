@@ -331,14 +331,16 @@ def main(debug):
     else:
         _implib_lflags = IMPLIB_LFLAGS.get(platform, [])
 
-    if JCC_HELPERS_JDK is not None:
+    if JCC_HELPERS_JDK is not None and platform != "win32" and platform != "mingw32":
         _javac = [os.path.join(JCC_HELPERS_JDK, "bin", "javac")]
     elif 'JCC_JAVAC' in os.environ:
         _javac = os.environ['JCC_JAVAC'].split(_jcc_argsep)
     else:
         _javac = JAVAC[platform]
 
-    if 'JCC_JAVADOC' in os.environ:
+    if JCC_HELPERS_JDK is not None and platform != "win32" and platform != "mingw32":
+        _javadoc = [os.path.join(JCC_HELPERS_JDK, "bin", "javadoc")]
+    elif 'JCC_JAVADOC' in os.environ:
         _javadoc = os.environ['JCC_JAVADOC'].split(_jcc_argsep)
     else:
         _javadoc = JAVADOC[platform]
