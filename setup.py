@@ -331,7 +331,9 @@ def main(debug):
     else:
         _implib_lflags = IMPLIB_LFLAGS.get(platform, [])
 
-    if 'JCC_JAVAC' in os.environ:
+    if JCC_HELPERS_JDK is not None:
+        _javac = [os.path.join(JCC_HELPERS_JDK, "bin", "javac")]
+    elif 'JCC_JAVAC' in os.environ:
         _javac = os.environ['JCC_JAVAC'].split(_jcc_argsep)
     else:
         _javac = JAVAC[platform]
